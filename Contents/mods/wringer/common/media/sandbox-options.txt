@@ -1,4 +1,4 @@
-VERSION = 1
+VERSION = 1,
 
 option Wringer.Enable {
     type = boolean,
@@ -13,6 +13,6 @@ option Wringer.WringingDuration {
     min = 1,
     max = 5,
     page = Wringer_Options,
-    translation = Wringer_WringingDuration
+    translation = Wringer_WringingDuration,
 
 }

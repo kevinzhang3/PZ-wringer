@@ -39,31 +39,34 @@ function ISWringClothing:WringerContextMenu(playerNum, context, items)
     local player = getSpecificPlayer(playerNum)
 
     -- check if we have any wet clothes
+    local wet = false
     for index, item in ipairs(items) do
         if instanceof(item, "InventoryItem") and instanceof(item, "Clothing") then
-            if item:getWetness() <= 10 then return else break end
+            if item:getWetness() > 10 then wet = true break end
         end
-    
+    end
+    if not wet then return end
+
+    -- we have wet clothes 
     local function WringAllOption()
-        for _, item in ipairs(player:getWornItems()) do
+        for _, item in ipairs(player:getWornItems():getItems()) do
             if item:getWetness() > 10 then
                 -- unequip
                 ISTimedActionQueue.add(
-                    ISUnequipAction:new(character, item, 50)
+                    ISUnequipAction:new(player, item, 50)
                 )
                 -- wring 
-                ISTimedActionQueue.add(ISWringClothing:new(character, item))
+                ISTimedActionQueue.add(ISWringClothing:new(player, item))
 
                 -- re-equip
                 ISTimedActionQueue.add(
-                    ISWearClothing:new(character, item, 50)
+                    ISWearClothing:new(player, item, 50)
                 )
             end
         end
     end
 
     context:addOption("Wring all clothes", player, WringAllOption)
-    end
 end
 
 Events.OnFillInventoryObjectContextMenu.Add(ISWringClothing.WringerContextMenu)

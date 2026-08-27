@@ -1,0 +1,6 @@
+{
+    "Sandbox_Wringer_Options": "Wringer Options",
+    "Sandbox_Wringer_Enable": "Enabled",
+    "Sandbox_Wringer_WringingDuration": "Wringing speed multiplier",
+    "Sandbox_Wringer_WringingDuration_tooltip": "The duration is the result of this value multiplied by the wetness of the item. Vanilla = 5" 
+}
