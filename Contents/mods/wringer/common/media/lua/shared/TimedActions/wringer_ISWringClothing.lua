@@ -2,7 +2,7 @@ require "TimedActions/ISBaseTimedAction"
 
 local enable = SandboxVars.Wringer.Enable
 
-local og_perform = ISWringClothing:perform()
+local og_perform = ISWringClothing:perform
 function ISWringClothing:perform()
     if not enable then
         og_perform(self)
@@ -19,7 +19,7 @@ function ISWringClothing:perform()
     end
 end
 
-local og_complete = ISWringClothing:complete()
+local og_complete = ISWringClothing:complete
 function ISWringClothing:complete()
     if not enable then
         og_complete(self)
@@ -40,7 +40,7 @@ function ISWringClothing:complete()
     return true
 end
 
-local og_getDuration = ISWringClothing:getDuration()
+local og_getDuration = ISWringClothing:getDuration
 function ISWringClothing:getDuration()
     if not enable then
         og_getDuration(self)
