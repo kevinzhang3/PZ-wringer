@@ -2,9 +2,10 @@ require "TimedActions/ISBaseTimedAction"
 
 local enable = SandboxVars.Wringer.Enable
 
+local og_perform = ISWringClothing:perform()
 function ISWringClothing:perform()
     if not enable then
-        ISWringClothing:getDuration()
+        og_perform(self)
     end
 
     self:stopSound()
@@ -16,16 +17,36 @@ function ISWringClothing:perform()
     if self.wasEquipped then
         ISTimedActionQueue.add(ISWearClothing:new(self.character, self.item, 50))
     end
-
 end
 
-function ISWringClothing:getDuration()
-    local durationOption = SandboxVars.Wringer.WringingDuration
+local og_complete = ISWringClothing:complete()
+function ISWringClothing:complete()
     if not enable then
-        ISWringClothing:getDuration()
+        og_complete(self)
     end
 
-    -- custom code 
+    local wetLevel = SandboxVars.Wringer.WetnessAfterWringing
+    if self.item == nil then
+        return false
+    end
+    if instanceof(self.item, "Clothing") then
+        if self.item:getBodyLocation() == "Shoes" then
+            self.item:setWetness(math.min(self.item:getWetness(), wetLevel))
+        else
+            self.item:setWetness(math.min(self.item:getWetness(), wetLevel))
+        end
+    end
+    syncItemFields(self.character, self.item)
+    return true
+end
+
+local og_getDuration = ISWringClothing:getDuration()
+function ISWringClothing:getDuration()
+    if not enable then
+        og_getDuration(self)
+    end
+
+    local durationOption = SandboxVars.Wringer.WringingDuration
     if self.item == nil then
         return 0
     end
@@ -35,12 +56,13 @@ function ISWringClothing:getDuration()
     return math.ceil(self.item:getWetness() * durationOption)
 end
 
-function ISWringClothing:WringerContextMenu(playerNum, context, items)
+function ISWringClothing:WringerContextMenu(playerNum, context)
     local player = getSpecificPlayer(playerNum)
+    local wornItems = player:getWornItems():getItems()
 
     -- check if we have any wet clothes
     local wet = false
-    for index, item in ipairs(items) do
+    for _, item in ipairs(wornItems) do
         if instanceof(item, "InventoryItem") and instanceof(item, "Clothing") then
             if item:getWetness() > 10 then wet = true break end
         end
@@ -49,7 +71,7 @@ function ISWringClothing:WringerContextMenu(playerNum, context, items)
 
     -- we have wet clothes 
     local function WringAllOption()
-        for _, item in ipairs(player:getWornItems():getItems()) do
+        for _, item in ipairs(wornItems) do
             if item:getWetness() > 10 then
                 -- unequip
                 ISTimedActionQueue.add(

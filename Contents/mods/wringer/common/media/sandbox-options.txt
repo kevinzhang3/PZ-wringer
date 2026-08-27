@@ -14,5 +14,13 @@ option Wringer.WringingDuration {
     max = 5,
     page = Wringer_Options,
     translation = Wringer_WringingDuration,
+}
 
+option Wringer.WetnessAfterWringing {
+    type = integer,
+    default = 10,
+    min = 0,
+    max = 100,
+    page = Wringer_Options,
+    translation = Wringer_WetnessAfterWringing,
 }
