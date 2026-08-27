@@ -1,15 +1,12 @@
 require "TimedActions/ISBaseTimedAction"
 
-ISWringClothing = ISBaseTimedAction:derive("ISWringClothing")
-
-
-
 function ISWringClothing:getDuration()
+    local durationOption = SandboxVars.wringer.WringingDuration
     if self.item == nil then
         return 0
     end
     if self.character:isTimedActionInstant() then
         return 1
     end
-    return math.ceil(self.item:getWetness() * 1)
+    return math.ceil(self.item:getWetness() * durationOption)
 end
