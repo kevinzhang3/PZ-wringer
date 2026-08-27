@@ -1,16 +1,18 @@
 VERSION = 1
 
-option wringer.Enable {
+option Wringer.Enable {
     type = boolean,
     default = true,
     page = Wringer_Options,
+    translation = Wringer_Enable,
 }
 
-option wringer.WringingDuration {
+option Wringer.WringingDuration {
     type = integer,
     default = 1,
     min = 1,
     max = 5,
     page = Wringer_Options,
+    translation = Wringer_WringingDuration
 
 }
