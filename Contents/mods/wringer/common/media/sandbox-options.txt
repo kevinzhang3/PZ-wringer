@@ -3,7 +3,7 @@ VERSION = 1
 option wringer.Enable {
     type = boolean,
     default = true,
-    page = Wringer Options,
+    page = Wringer_Options,
 }
 
 option wringer.WringingDuration {
@@ -11,6 +11,6 @@ option wringer.WringingDuration {
     default = 1,
     min = 1,
     max = 5,
-    page = Wringer Options,
+    page = Wringer_Options,
 
 }
