@@ -1,10 +1,6 @@
 version=1
-title=pzmc-Template
-description=[h2]Brief 1 sentence description.[/h2]
-description=
-description=[url=https://discord.gg/SReMnbV4V7][img]https://raw.githubusercontent.com/Chuckleberry-Finn/chuckImages/main/PZmodCommBanner2.png[/img][/url]
-description=
-description=
-description=[h3]Copyright 2026 <USERNAME>. This item is not authorized for posting on Steam, except under the Steam account named <USERNAME>.[/h3]
-tags=Build 41;
+id=3791146459
+title=[42.20.3] wringer
+description=[h2]A QOL mod to enable wringing all clothes at once + sandbox options.[/h2]
+tags=Build 42
 visibility=unlisted
