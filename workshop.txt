@@ -1,6 +1,6 @@
 version=1
 id=3791146459
-title=[42.20.3] wringer
+title=[42.20.3] Wringer
 description=[h2]A QOL mod to enable wringing all clothes at once + sandbox options.[/h2]
 tags=Build 42
 visibility=unlisted

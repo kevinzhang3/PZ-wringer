@@ -2,10 +2,10 @@ require "TimedActions/ISBaseTimedAction"
 
 local enable = SandboxVars.Wringer.Enable
 
-local og_perform = ISWringClothing:perform
+local og_perform = ISWringClothing.perform
 function ISWringClothing:perform()
     if not enable then
-        og_perform(self)
+        og_perform(self) return
     end
 
     self:stopSound()
@@ -19,10 +19,10 @@ function ISWringClothing:perform()
     end
 end
 
-local og_complete = ISWringClothing:complete
+local og_complete = ISWringClothing.complete
 function ISWringClothing:complete()
     if not enable then
-        og_complete(self)
+        og_complete(self) return
     end
 
     local wetLevel = SandboxVars.Wringer.WetnessAfterWringing
@@ -40,10 +40,10 @@ function ISWringClothing:complete()
     return true
 end
 
-local og_getDuration = ISWringClothing:getDuration
+local og_getDuration = ISWringClothing.getDuration
 function ISWringClothing:getDuration()
     if not enable then
-        og_getDuration(self)
+        og_getDuration(self) return
     end
 
     local durationOption = SandboxVars.Wringer.WringingDuration
@@ -56,7 +56,7 @@ function ISWringClothing:getDuration()
     return math.ceil(self.item:getWetness() * durationOption)
 end
 
-function ISWringClothing:WringerContextMenu(playerNum, context)
+function ISWringClothing.WringerContextMenu(playerNum, context, items)
     local player = getSpecificPlayer(playerNum)
     local wornItems = player:getWornItems():getItems()
 
